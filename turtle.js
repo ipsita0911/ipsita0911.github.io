@@ -19,26 +19,27 @@ function Turtle (canvas, turtle) {
 }
 
 Turtle.prototype.savestate = function() {
-//    if (this.undobuffer.length > 23) {
-//        this.undobuffer.shift();
-//    }
-//    this.undobuffer.push(this.getstate());
-//
-//    this.redobuffer = [];
+   if (this.undobuffer.length > 23) {
+       this.undobuffer.shift();
+       
+   }
+   this.undobuffer.push(this.getstate());
+console.log(this.undobuffer)
+   this.redobuffer = [];
 }
 
 Turtle.prototype.getstate = function() {
-//    img = this.c.getImageData(0,0,this.max_x,this.max_y);
-//    return {"x":this.x,"y":this.y,"angle":this.angle,"img":img};
+   img = this.c.getImageData(0,0,this.max_x,this.max_y);
+   return {"x":this.x, "y":this.y, "angle":this.angle, "img":img};
 }
 Turtle.prototype.setstate = function(state) {
-//    this.x = state.x;
-//    this.y = state.y;
-//    this.angle = state.angle;
-//    this.clean_();
-//    this.c.putImageData(state.img,0,0);
-//    this.update();
-//
+   this.x = state.x;
+   this.y = state.y;
+   this.angle = state.angle;
+   this.clean_();
+   this.c.putImageData(state.img,0,0);
+   this.update();
+
 }
 
 
@@ -46,6 +47,7 @@ Turtle.prototype.setstate = function(state) {
 Turtle.prototype.undo = function() {
     if (this.undobuffer.length > 0) {
         prev = this.undobuffer.pop();
+        console.log(this.undobuffer);
         curr = this.getstate();
         this.setstate(prev);
         this.redobuffer.push(curr);
@@ -148,7 +150,6 @@ Turtle.prototype.linebet = function(x1, y1, x2, y2) {
 
 
 Turtle.prototype.arc = function (radius, angle) {
-    console.log("Hello");
     this.savestate();
     if (this.pen) {
         this.c.beginPath();
@@ -169,6 +170,7 @@ Turtle.prototype.arcc = function (center_x, center_y, radius, angle) {
 }
 
 Turtle.prototype.arc_point = function (radius, angle) {
+    this.savestate();
     if (this.pen) {
         this.c.beginPath();
         this.c.arc(this.x,this.y, radius, ((this.angle+angle)%360)/180*Math.PI, ((this.angle+angle+1)%360)/180*Math.PI,false);
@@ -178,7 +180,7 @@ Turtle.prototype.arc_point = function (radius, angle) {
 }
 
 Turtle.prototype.rect = function (x1, y1, x2, y2) {
-    // this.savestate();
+    this.savestate();
     if (this.pen) {
         this.c.rect(x1, y1, x2, y2);
         this.c.stroke();
@@ -187,6 +189,7 @@ Turtle.prototype.rect = function (x1, y1, x2, y2) {
 }
 
 Turtle.prototype.arc_pointc = function (center_x, center_y, radius, angle) {
+    this.savestate();
     if (this.pen) {
         this.c.beginPath();
         this.c.arc(center_x,center_y, radius, ((this.angle+angle)%360)/180*Math.PI, ((this.angle+angle+1)%360)/180*Math.PI,false);
@@ -330,6 +333,9 @@ function DelayCommand (that,fun,args) {
     this.args = args;
 }
 
+
+
+
 DelayCommand.prototype.call = function (that) {
     return this.fun.apply(this.that,this.args);
 }
@@ -429,8 +435,8 @@ DelayTurtle.prototype.arcc = function(center_x, center_y, radius, angle) {
 };
 
 DelayTurtle.prototype.circle = function(radius) {
+    this.savestate();
     if (this.drawbits) {
-        this.savestate();
         for (var c = 0; c < 360; c++ ) {
             this.addCommand(this.turtle.arc_point,[radius,c])
 

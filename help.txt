@@ -14,8 +14,9 @@ FUNCTION CALLS: COMMAND arg arg arg ...
 
 Supported Commands:
 
-RESET           Clear the screen, move home.
-
+RESET           Clear the screen, move home
+UNDO            Undo's the last command
+REDO            Redo's the previous command
 
 Turtle Movement:
 
