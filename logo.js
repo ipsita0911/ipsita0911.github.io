@@ -121,11 +121,18 @@ Logo.prototype.setup = function () {
     this.addCommand('linebet', 4, null, function(a){
         if (parseInt(a[0]) != a[0]) return new Token('error','When using linebet, you can only set x to a whole number, not '+a[0])
         if (parseInt(a[1]) != a[1]) return new Token('error','When using linebet, you can only set y to a whole number, not '+a[1])
-        if (parseInt(a[2]) != a[2]) return new Token('error','When using linebet, you can only set x to a whole number, not '+a[0])
-        if (parseInt(a[3]) != a[3]) return new Token('error','When using linebet, you can only set y to a whole number, not '+a[1])
+        if (parseInt(a[2]) != a[2]) return new Token('error','When using linebet, you can only set x to a whole number, not '+a[2])
+        if (parseInt(a[3]) != a[3]) return new Token('error','When using linebet, you can only set y to a whole number, not '+a[3])
         this.turtle.linebet(a[0],a[1],a[2],a[3]);
     });
+    
 
+    this.addCommand('projectile', 3, null, function(a){
+        if (parseInt(a[0]) != a[0]) return new Token('error','When using projectile, you can only set x to a whole number, not '+a[0])
+        if (parseInt(a[1]) != a[1]) return new Token('error','When using projectile, you can only set y to a whole number, not '+a[1])
+        if (parseInt(a[2]) != a[2]) return new Token('error','When using projectile, you can only set x to a whole number, not '+a[2])
+        this.turtle.projectile(a[0],a[1],a[2])
+    })
 
 
     this.addCommand('setpos',1,null, function (b) { 

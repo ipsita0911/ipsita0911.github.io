@@ -11,21 +11,61 @@
 <script type="text/javascript" src="logo.js"></script>
 <script type="text/javascript" src="init.js"></script>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.collapsible {
+  background-color: #000000;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+.button1 {
+  background-color: #010101; 
+  border: none;
+  color: white;
+  padding: 8px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+</style>
+
 </head>
-<body onload="init('canvas','turtle','input','oldcode', 'textOutput'); clearcanvas(); run(1,false);">
+<body onload="init('canvas','turtle','input','oldcode', 'textOutput'); clearcanvas(); run(1,false);" bgcolor=#F5F5F5>
     
 <div id="main">
 <form id="input" action="/" method="post" onSubmit="this.img.value = canvas.toDataURL().replace('data:image/png;base64,','')">
-<div id="top"><div class="inner"><h1>papert&#8213;Logo in your browser</h1></div></div>
+<div id="top"><div class="inner"><h1 align = "center"> <font face = "Comic sans MS"><b>PAPERT &#8213; </b>Logo in your browser</font></h1></div></div>
 
 <div id="content">
     <div class="inner">
         <div id="oldcode">&nbsp;</div>
         <div>
-        <textarea name="code" id="code" rows="80" cols="20" spellcheck="false"></textarea>
+        <textarea name="code" id="code" rows="80" cols="20" spellcheck="false" style = "background-color:#FFFAFA  ;" ></textarea>
         </div>
         <div style="margin: 5px;">
-        <input type="button" onClick="run(25,true);" value="run slowly" />
+        <input type="button" onClick="run(25,true);" value="run slowly" style="font-weight: bold;"/>
         <input type="button" onClick="run(5,false);" value="run normally" style="font-weight: bold;"/>
         <!-- <input type="button" onClick="run(1,false);" value="run fast" /> -->
         <input type="button" onClick="stop();" value="stop program" />
@@ -41,14 +81,14 @@
         <div id="turtle">
         <embed width="20" height="20" src="turtle.svg"/>
         </div>
-        <canvas id="canvas" width="500" height="500">
+        <canvas id="canvas" width="500" height="500" background-color = #F5F5DC >
     Your browser doesn't support canvas tags. Please upgrade to a recent version of Firefox or Opera.
     </canvas>
     <span style="float: left; margin-right: auto;">
-    <input type="button" onClick="document.location.href = canvas.toDataURL().replace('image/png', 'image/octet-stream')" value="save as png" />
+    <input type="button" onClick="document.location.href = canvas.toDataURL().replace('image/png', 'image/octet-stream')" value="save as png" class="button1" />
     </span>
      <span style="float: right;margin-left: auto; margin-right: 20px;">
-     <input type="button" onClick="clearcanvas();" value="clear" />
+     <input type="button" onClick="clearcanvas();" value="clear" class="button1" />
      </span>
 </div>
         
@@ -63,8 +103,280 @@ this is free software, and
 &nbsp;
 </div>
 
-<iframe id="notes" src="help.txt"/>
+<!-- <iframe id="notes" src="help.txt"/>
+ -->
 
+<button class = "collapsible"> FOR QUICK REFERENCE CLICK HERE</button>
+<div class = "content">
+    <p><pre>
+WORDS:          FW BW ....
+NUMBERS:        0, 0.1, 20
+LISTS:          [1 2 3 5]
+SYMBOLS:        "foo "bar
+VARIABLES:      :foo :bar 
+FUNCTION CALLS: COMMAND arg arg arg ...
+                (COMMAND arg arg arg ...)
+
+Supported Commands:
+
+RESET           Clear the screen, move home
+UNDO            Undo's the last command
+REDO            Redo's the previous command
+
+Turtle Movement:
+
+FORWARD n       Move the turtle forward n pixels
+FW n    
+
+BACKWARD n      Move the turtle backward n pixels
+
+RIGHT n         Move the turtle left or right n degrees
+RT n
+LEFT n
+LT n
+
+SETX x          Set the co-ordinates of the turtle
+SETY y
+SETXY x y
+
+HOME            Move the turtle to the home position
+
+
+Drawing:
+
+CLEARSCREEN     Clear the screen
+CLEAR
+CS
+
+CIRCLE r        Draw a Circle of radius r around the turtle
+CIRCLEC x y r   Draw a Circle of radius r around the given co-ordinates 
+
+ARC r d         Draw an arc of radius r for d degrees
+ARC x y r d     Draw an arc of radius r for d degrees aroung the given co-ordinates
+
+LINEBET x1 y1 x2 y2    Draw a line between the given co-ordinates
+
+RECT x1 y1 x2 y2 Draw a rectangle with co-ordinates of diagonally opposite corners
+
+PENUP           Lift the pen up and down
+PU
+PENDOWN
+PD
+
+COLOR [r g b]   Set the pen color
+
+PENWIDTH w      Set the pen width
+
+
+Text:
+
+PRINT "foo          Prints "foo"
+PR "foo
+PRINT ["foo "bar]   Prints "foo bar"
+PR ["foo "bar]
+
+CLEARTEXT           Clears previously printed text
+CT
+
+
+Arithmetic:
+
+1 + 2                   1 * 2
+SUM 1 2                 PRODUCT 1 2
+(SUM 1 2 3 ...)         (PRODUCT 1 2 3 ...)
+
+1 - 2                   1 / 2
+DIFFERENCE 1 2          DIVIDE 1 2
+
+1 % 2
+MOD 1 2
+
+RANDOM n        Return a integer in [0,n)
+RAND n
+
+RERANDOM s      Set the random seed value
+SRAND s
+
+
+INT n
+ROUND n
+POWER e m
+EXP n
+LN n
+LOG10 n
+
+
+
+SIN, COS
+RADSIN,RADCOS
+
+ARCTAN
+RADARCTAN
+
+
+
+List Operators (experimental):
+These functions may break silently at the moment.
+
+FIRST, HEAD             Return the first item in a list
+BUTFIRST, TAIL          Return the everything but the first item in a list
+LAST                    Return the last item in a list
+BUTLAST                 Return everything but the last item in a list
+
+FPUT item list  Return a new list with item at the front
+LPUT item list  Return a new list with item at the back
+
+ITEM index list                 Retrieve the indexed item
+SETITEM index list value        Set the indexed item
+
+EMPTY? list     Return true if list is empty
+EMPTYP list 
+
+Logical and Comparison:
+
+1 = 1
+EQUAL? 1 1
+EQUALP 1 1
+
+1 < 2                1 <= 2
+LESS? 1 2               LESSEQUAL? 1 2
+LESSP 1 2               LESSEQUALP 1 2
+
+2 > 1                2 > 1
+GREATER? 2 1            GREATEREQUAL? 2 1
+GREATERP 2 1            GREATEREQUALP 2 1
+
+AND TRUE FALSE          OR FALSE TRUE
+
+Conditionals:
+
+IF COND [IF_TRUE] 
+IF 2 > 1 [FW 100]
+
+IFELSE COND [IF_TRUE] [IF_FALSE]
+IFELSE 2 > 1 [FW 100 RT 90] [BW 100 LT 90]
+
+
+Setting and getting:
+
+Set x to 1:             make "x 1
+Adding :n to :x         :n + :x
+Setting :x to :n + :x   make "x :x + :n
+
+Looping:
+
+REPEAT n [COMMANDS ...]
+
+STOP    - Stop the current Repeat or function.
+
+OUTPUT f  - Return f.
+OP f
+
+
+Defining and Calling:
+
+TO FOO :ARG1 :ARG2 BODY END
+
+TO SQUARE :length 
+REPEAT 4 [FW :length RT 90]
+END
+
+SQUARE :10
+
+TO POLYGON :length :sides
+REPEAT :sides [FW :length RT 360/:sides]
+END
+
+POLYGON 5 10
+
+</pre>
+
+
+</p>
 </div>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+<script>
+      function writeMessage(canvas, message) {
+        var context = canvas.getContext('2d');
+        context.clearRect(0, 0, 400, 30);
+        context.font = '18pt Calibri';
+        context.fillStyle = 'black';
+        context.fillText(message, 10, 25);
+      }
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top - 0.125
+        };
+      }
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+
+      canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = getMousePos(canvas, evt);
+        var message = 'Cursor position: ' + mousePos.x + ',' + mousePos.y;
+        writeMessage(canvas, message);
+      }, false);
+    </script>
+<!-- 
+     <script>
+
+      document.addEventListener("DOMContentLoaded", init, false);
+
+      function init()
+      {
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener("mousedown", getPosition, false);
+      }
+
+      function getPosition(event)
+      {
+        var x = new Number();
+        var y = new Number();
+        var canvas = document.getElementById("canvas");
+
+        if (event.x != undefined && event.y != undefined)
+        {
+          x = event.x;
+          y = event.y;
+        }        else
+        {
+          x = event.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+          y = event.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+        }
+
+        x -= canvas.offsetLeft;
+        y -= canvas.offsetTop;
+
+        alert("x: " + x + "  y: " + y);
+      }
+
+    </script>
+ -->
+  </body>
+</html>
+
+
 </body>
 </html>

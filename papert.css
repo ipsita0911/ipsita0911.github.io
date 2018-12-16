@@ -50,9 +50,9 @@ body{
     width: 520px;
     margin-left: -956px;
     height: 560px;
-    background: #5370C0;
+    background: #FFFFFF;
     border-style: solid;
-    border-color: #5370C0;
+    border-color: #000000;
 }
 
 #canvas {
@@ -83,11 +83,11 @@ body{
 #footer{
     clear: left;
     width: 100%;
-    background: black;
+    background: #5F9EA0;
     text-align: center;
     padding: 4px 0;
     border-style: solid;
-    border-color: black;
+    border-color: #5F9EA0;
 }
 
 #recent ul {
@@ -121,5 +121,7 @@ body{
 }
 
 .inner{
-    margin: 2px 2px 2px 10px;
+    margin: 10px 10px 10px 10px;
 }
+
+

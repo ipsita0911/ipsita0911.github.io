@@ -226,6 +226,7 @@ Turtle.prototype.forward = function (d) {
 }
 
 Turtle.prototype.crawl = function (d) {
+    // this.savestate()
     this.c.beginPath();
     
     this.c.moveTo(this.x,this.y);
@@ -247,6 +248,35 @@ Turtle.prototype.crawl = function (d) {
     this.update();
 }
 
+// Turtle.prototype.projectile = function(velocity, angle, gravity){
+//     console.log("Projectile");
+//     this.savestate();
+//     if (this.pen){
+//     this.c.beginPath();
+//     this.c.moveTo(this.x , this.y);
+//     var px1 = this.x + velocity*velocity*Math.sin(2*angle*Math.PI/180)/(2*gravity)
+//     var py1 = this.y + velocity*velocity*Math.sin(angle*Math.PI/180)*Math.tan(angle*Math.PI/180)/2*gravity
+//     var px2 = this.x + velocity*velocityangle*M*Math.sin(2*h.PI/180)/gravity
+
+//     this.c.quadraticCurveTo (px1, py1, px2, this.y)
+//     this.c.stroke();
+//     } else moveTo(px2, this.y)
+
+// }
+
+Turtle.prototype.projectile = function(v, theta, g){
+    this.savestate();
+    if (this.pen){
+        this.c.beginPath();
+        this.c.moveTo(this.x, this.y);
+        var i
+        var r = v*v*Math.sin(2*theta*Math.PI/180)/g
+        for(i=0; i<= r; i++)
+        this.c.lineTo(this.x + i, this.y - i*Math.tan(theta*Math.PI/180)+i*i*Math.tan(theta*Math.PI/180)/r)
+        this.c.stroke();
+    }
+    else{ moveTo(this.x+r, this.y)}
+}
 
 Turtle.prototype.backward = function (d) {
     this.forward(-d);
@@ -325,6 +355,9 @@ Turtle.prototype.setup = function() {
     this.pen = true;
 }
 
+
+
+
 Turtle.prototype.paint = function () {}
 
 function DelayCommand (that,fun,args) {
@@ -332,8 +365,6 @@ function DelayCommand (that,fun,args) {
     this.fun = fun;
     this.args = args;
 }
-
-
 
 
 DelayCommand.prototype.call = function (that) {
@@ -478,6 +509,11 @@ DelayTurtle.prototype.linebet = function(x1, y1, x2, y2) {
         this.addCommand(this.turtle.linebet, [x1, y1, x2, y2])
     //}
 }
+
+DelayTurtle.prototype.projectile = function(v, theta, g){
+    this.addCommand (this.turtle.projectile, [v, theta, g])
+}
+
 
 DelayTurtle.prototype.rect = function (x1, y1, x2, y2) {
     this.addCommand(this.turtle.rect, [x1, y1, x2, y2])
