@@ -271,11 +271,17 @@ Turtle.prototype.projectile = function(v, theta, g){
         this.c.moveTo(this.x, this.y);
         var i
         var r = v*v*Math.sin(2*theta*Math.PI/180)/g
+        var nowx = this.x + r
         for(i=0; i<= r; i++)
         this.c.lineTo(this.x + i, this.y - i*Math.tan(theta*Math.PI/180)+i*i*Math.tan(theta*Math.PI/180)/r)
         this.c.stroke();
-    }
+
+        }
     else{ moveTo(this.x+r, this.y)}
+
+        this.x = nowx
+        this.y = this.y
+        this.update()
 }
 
 Turtle.prototype.backward = function (d) {
@@ -505,7 +511,7 @@ DelayTurtle.prototype.linebet = function(x1, y1, x2, y2) {
     //     for (var c = 0; c < l; c++ ) {
     //         // this.addCommand(this.turtle.crawl2,[s, slope])
     //     }
-    // } else {
+    // } else { 
         this.addCommand(this.turtle.linebet, [x1, y1, x2, y2])
     //}
 }
