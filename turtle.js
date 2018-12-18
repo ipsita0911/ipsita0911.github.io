@@ -179,10 +179,11 @@ Turtle.prototype.arc_point = function (radius, angle) {
   }
 }
 
-Turtle.prototype.rect = function (x1, y1, x2, y2) {
+Turtle.prototype.rect = function (x1, y1, w, h) {
     this.savestate();
     if (this.pen) {
-        this.c.rect(x1, y1, x2, y2);
+        this.c.beginPath();
+        this.c.rect(x1, y1, w, h);
         this.c.stroke();
 
     }
@@ -226,7 +227,7 @@ Turtle.prototype.forward = function (d) {
 }
 
 Turtle.prototype.crawl = function (d) {
-    // this.savestate()
+    this.savestate()
     this.c.beginPath();
     
     this.c.moveTo(this.x,this.y);
@@ -521,8 +522,8 @@ DelayTurtle.prototype.projectile = function(v, theta, g){
 }
 
 
-DelayTurtle.prototype.rect = function (x1, y1, x2, y2) {
-    this.addCommand(this.turtle.rect, [x1, y1, x2, y2])
+DelayTurtle.prototype.rect = function (x1, y1, w, h) {
+    this.addCommand(this.turtle.rect, [x1, y1, w, h])
 }
 
 
